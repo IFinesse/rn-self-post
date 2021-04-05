@@ -1,15 +1,16 @@
 import { StatusBar } from 'expo-status-bar';
 import React, {useState} from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import {AppLoading} from 'expo'
+import AppLoading from 'expo-app-loading'
 import {bootstrap} from './src/bootstrap'
+import { AppNavigation } from './src/navigation/AppNavigation';
 
 
 export default function App() {
 
-  conbst [isReady, setIsReady] = useState(false)
+  const [isReady, setIsReady] = useState(false)
 
-  if (!isdReady) return (
+  if (!isReady) return (
     <AppLoading 
       startAsync = {bootstrap}
       onFinish= {()=> setIsReady(true)}
@@ -17,9 +18,6 @@ export default function App() {
     />
   )
   return (
-    <View style={styles.container}>
-      <Text>start</Text>
-      <StatusBar style="auto" />
-    </View>
+    <AppNavigation />
   );
 }
