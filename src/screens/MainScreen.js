@@ -5,7 +5,7 @@ import {DATA} from '../data'
 
 export const MainScreen = ({ navigation }) => {
   const onOpenHandler = (post) => {
-    navigation.navigate("Post");
+    navigation.navigate("Post", {postId: post.id, date: post.date});
   };
   return (
     <View style={styles.wrapper}>
