@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
   },
   text: {
     color: "#fff",
-    fontFamily: "OpenSans_700Bold_Italic,",
+    fontFamily: "OpenSans_700Bold_Italic",
     // fontFamily: 'normal',
     // fontWeight: 'bold'
   },

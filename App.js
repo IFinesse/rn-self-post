@@ -34,9 +34,9 @@ export default function App() {
 
   let [fontsLoaded, error] = useFonts( {
     OpenSans_400Regular,
-    OpenSans_300Light,
-    OpenSans_800ExtraBold,
-    OpenSans_700Bold,
+    // OpenSans_300Light,
+    // OpenSans_800ExtraBold,
+    // OpenSans_700Bold,
     OpenSans_700Bold_Italic,
   })
 
