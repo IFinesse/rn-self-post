@@ -9,6 +9,7 @@ import {
   Button,
   Alert,
 } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
 import { DATA } from "../data";
 import { THEME } from "../theme";
 
@@ -44,8 +45,21 @@ export const PostScreen = ({ navigation }) => {
 
 PostScreen.navigationOptions = ({ navigation }) => {
   const date = navigation.getParam("date");
+  const booked = navigation.getParam('booked');
+  const iconName = booked ? 'ios-star' : 'ios-star-outline'
   return {
     headerTitle: `post from ${new Date(date).toLocaleDateString()}`,
+    headerRight: () => {
+        return (
+          <View style={styles.cameraIconContainer}>
+            <Ionicons
+              color={Platform.OS === "android" ? "#fff" : THEME.MAIN_COLOR}
+              name={iconName}
+              size={24}>
+            </Ionicons>
+          </View>
+        );
+      },
   };
 };
 
@@ -65,4 +79,10 @@ const styles = StyleSheet.create({
     width: "100%",
     height: 200
   },
+  cameraIconContainer: {
+    width: 90,
+    height: 90,
+    padding: 30,
+  //   backgroundColor: 'green'
+}
 });

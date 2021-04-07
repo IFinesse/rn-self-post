@@ -16,7 +16,7 @@ import { THEME } from "../theme";
 
 export const MainScreen = ({ navigation }) => {
   const onOpenHandler = (post) => {
-    navigation.navigate("Post", { postId: post.id, date: post.date });
+    navigation.navigate("Post", { postId: post.id, date: post.date, booked: post.booked });
   };
   return (
     <View style={styles.wrapper}>
@@ -37,6 +37,17 @@ MainScreen.navigationOptions = {
         <Ionicons
           color={Platform.OS === "android" ? "#fff" : THEME.MAIN_COLOR}
           name="camera"
+          size={24}>
+        </Ionicons>
+      </View>
+    );
+  },
+  headerLeft: () => {
+    return (
+      <View style={styles.menuIconContainer}>
+        <Ionicons
+          color={Platform.OS === "android" ? "#fff" : THEME.MAIN_COLOR}
+          name="ios-menu"
           size={24}>
         </Ionicons>
       </View>
