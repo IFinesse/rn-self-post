@@ -9,6 +9,7 @@ import {
   Button,
   Alert,
 } from "react-native";
+import {createBottomTabNavigator} from 'react-navigation-tabs'
 import { Ionicons } from "@expo/vector-icons";
 import { DATA } from "../data";
 import { THEME } from "../theme";
