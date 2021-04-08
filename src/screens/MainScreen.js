@@ -2,30 +2,32 @@ import React from "react";
 import {
   StyleSheet,
   View,
-  Text,
-  Button,
-  FlatList,
+  // Text,
+  // Button,
+  // FlatList,
   Platform,
 } from "react-native";
-import { HeaderButtons, Item } from "react-navigation-header-buttons";
-import { Post } from "../components/Post";
+// import { HeaderButtons, Item } from "react-navigation-header-buttons";
+// import { Post } from "../components/Post";
 import { DATA } from "../data";
-import { AppHeaderIcon } from "../components/AppHeaderIcon";
+// import { AppHeaderIcon } from "../components/AppHeaderIcon";
 import { Ionicons } from "@expo/vector-icons";
 import { THEME } from "../theme";
+import { PostList } from "../components/PostList";
 
 export const MainScreen = ({ navigation }) => {
   const onOpenHandler = (post) => {
     navigation.navigate("Post", { postId: post.id, date: post.date, booked: post.booked });
   };
   return (
-    <View style={styles.wrapper}>
-      <FlatList
-        data={DATA}
-        keyExtractor={(post) => post.id.toString()}
-        renderItem={({ item }) => <Post post={item} onOpen={onOpenHandler} />}
-      />
-    </View>
+    // <View style={styles.wrapper}>
+    //   <FlatList
+    //     data={DATA}
+    //     keyExtractor={(post) => post.id.toString()}
+    //     renderItem={({ item }) => <Post post={item} onOpen={onOpenHandler} />}
+    //   />
+    // </View>
+    <PostList data={DATA} onOpen={onOpenHandler}/>
   );
 };
 
@@ -56,7 +58,7 @@ MainScreen.navigationOptions = {
 };
 
 const styles = StyleSheet.create({
-  wrapper: {},
+  // wrapper: {},
   cameraIconContainer: {
       width: 90,
       height: 90,
