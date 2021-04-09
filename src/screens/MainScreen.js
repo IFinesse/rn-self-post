@@ -61,6 +61,9 @@ MainScreen.navigationOptions = ( {navigation} ) => ({
 
 const styles = StyleSheet.create({
   // wrapper: {},
+  menuIconContainer: {
+    paddingLeft: 20
+  },
   cameraIconContainer: {
       width: 90,
       height: 90,
