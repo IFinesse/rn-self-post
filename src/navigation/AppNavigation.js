@@ -92,7 +92,10 @@ const BottomNavigator = Platform.OS ==='android' ? createMaterialBottomTabNaviga
 
 const MainNavigator = createDrawerNavigator( {
     Posts: {
-        screen: BottomNavigator
+        screen: BottomNavigator,
+        navigationOptions: {
+          drawerLabel: 'Main'
+        }
     },
     About: {
         screen: AboutNavigator
@@ -100,6 +103,13 @@ const MainNavigator = createDrawerNavigator( {
     Create: {
         screen: CreateNavigator
     },
+}, {
+  contentOptions: {
+    activeTintColor: THEME.MAIN_COLOR,
+    labelStyle: {
+      fontFamily: "OpenSans_700Bold_Italic",
+    }
+  }
 })
 
 // createBottomTabNavigator( {
