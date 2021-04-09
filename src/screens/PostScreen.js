@@ -12,9 +12,9 @@ import {
 import {useDispatch,useSelector} from 'react-redux'
 import {createBottomTabNavigator} from 'react-navigation-tabs'
 import { Ionicons } from "@expo/vector-icons";
-import { DATA } from "../data";
+// import { DATA } from "../data";
 import { THEME } from "../theme";
-import { toggleBooked } from "../store/actions/post";
+import { removePost, toggleBooked } from "../store/actions/post";
 
 export const PostScreen = ({ navigation }) => {
 
@@ -39,7 +39,9 @@ export const PostScreen = ({ navigation }) => {
     })
   }, [toggleHandler])
 
-  const post = DATA.find((p) => p.id === postId);
+  const allPosts = useSelector(state => state.post.allPosts)
+
+  const post = allPosts.find((p) => p.id === postId);
 
   const onRemove = () => {
     Alert.alert(
@@ -50,9 +52,16 @@ export const PostScreen = ({ navigation }) => {
             text: "Cancel",
             style: "cancel"
           },
-          { text: "Remove", style:'destructive', onPress: () => {}}
+          { text: "Remove", style:'destructive', onPress: () => {
+            navigation.navigate('Main')
+            dispatch(removePost(postId))
+          }}
         ]
       );
+  }
+
+  if (!post) {
+    return null
   }
 
   return (
