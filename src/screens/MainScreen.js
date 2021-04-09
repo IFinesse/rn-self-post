@@ -31,7 +31,7 @@ export const MainScreen = ({ navigation }) => {
   );
 };
 
-MainScreen.navigationOptions = {
+MainScreen.navigationOptions = ( {navigation} ) => ({
   headerTitle: "Main",
   headerRight: () => {
     return (
@@ -50,12 +50,14 @@ MainScreen.navigationOptions = {
         <Ionicons
           color={Platform.OS === "android" ? "#fff" : THEME.MAIN_COLOR}
           name="ios-menu"
-          size={24}>
+          size={24}
+          onPress={() => navigation.toggleDrawer()}
+          >
         </Ionicons>
       </View>
     );
   },
-};
+});
 
 const styles = StyleSheet.create({
   // wrapper: {},
