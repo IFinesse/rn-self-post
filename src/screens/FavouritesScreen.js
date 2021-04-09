@@ -7,12 +7,13 @@ import {
   // FlatList,
   Platform,
 } from "react-native";
+import {useSelector} from 'react-redux'
 // import { HeaderButtons, Item } from "react-navigation-header-buttons";
 // import { Post } from "../components/Post";
-import { DATA } from "../data";
+// import { DATA } from "../data";
 // import { AppHeaderIcon } from "../components/AppHeaderIcon";
-import { Ionicons } from "@expo/vector-icons";
-import { THEME } from "../theme";
+// import { Ionicons } from "@expo/vector-icons";
+// import { THEME } from "../theme";
 import {PostList} from '../components/PostList'
 import { MenuIcon } from "../components/MenuIcon"
 
@@ -20,8 +21,10 @@ export const FavouritesScreen = ({ navigation }) => {
   const onOpenHandler = (post) => {
     navigation.navigate("Post", { postId: post.id, date: post.date, booked: post.booked });
   };
+
+  const bookedPosts = useSelector(state => state.post.bookedPosts)
   return (
-    <PostList data={DATA.filter(post=>post.booked===true)} onOpen={onOpenHandler}/>
+    <PostList data={bookedPosts} onOpen={onOpenHandler}/>
   );
 };
 

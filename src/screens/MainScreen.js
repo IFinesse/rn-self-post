@@ -1,34 +1,32 @@
-import React from "react";
+import React, {useEffect} from "react";
 import {
   StyleSheet,
   View,
-  // Text,
-  // Button,
-  // FlatList,
   Platform,
 } from "react-native";
-// import { HeaderButtons, Item } from "react-navigation-header-buttons";
-// import { Post } from "../components/Post";
-import { DATA } from "../data";
-// import { AppHeaderIcon } from "../components/AppHeaderIcon";
+import {useDispatch, useSelector} from 'react-redux'
+// import { DATA } from "../data";
 import { Ionicons } from "@expo/vector-icons";
 import { THEME } from "../theme";
 import { PostList } from "../components/PostList";
 import { MenuIcon } from "../components/MenuIcon";
+import { loadPosts } from "../store/actions/post";
 
 export const MainScreen = ({ navigation }) => {
   const onOpenHandler = (post) => {
     navigation.navigate("Post", { postId: post.id, date: post.date, booked: post.booked });
   };
+  const dispatch = useDispatch()
+
+  useEffect(()=> {
+    dispatch(loadPosts())
+  }, [dispatch])
+
+  const allPosts = useSelector(state => state.post.allPosts)
+  console.log(allPosts);
+
   return (
-    // <View style={styles.wrapper}>
-    //   <FlatList
-    //     data={DATA}
-    //     keyExtractor={(post) => post.id.toString()}
-    //     renderItem={({ item }) => <Post post={item} onOpen={onOpenHandler} />}
-    //   />
-    // </View>
-    <PostList data={DATA} onOpen={onOpenHandler}/>
+    <PostList data={allPosts} onOpen={onOpenHandler}/>
   );
 };
 
@@ -47,22 +45,12 @@ MainScreen.navigationOptions = ( {navigation} ) => ({
   },
   headerLeft: () => {
     return (
-      // <View style={styles.menuIconContainer}>
-      //   <Ionicons
-      //     color={Platform.OS === "android" ? "#fff" : THEME.MAIN_COLOR}
-      //     name="ios-menu"
-      //     size={24}
-      //     onPress={() => navigation.toggleDrawer()}
-      //     >
-      //   </Ionicons>
-      // </View>
       <MenuIcon onPressHandler={navigation.toggleDrawer}/>
     );
   },
 });
 
 const styles = StyleSheet.create({
-  // wrapper: {},
   menuIconContainer: {
     paddingLeft: 20
   },
@@ -70,13 +58,5 @@ const styles = StyleSheet.create({
       width: 90,
       height: 90,
       padding: 30,
-    //   backgroundColor: 'green'
   }
 });
-
-//   headerRight: (<Ionicons.Button><Ionicons />),
-//   headerRight: (
-//       <HeaderButtons HeaderButtonComponent={AppHeaderIcon}>
-//         <Item title='take photo' iconName='camera' onPress={() => {}}/>
-//       </HeaderButtons>
-//   )
