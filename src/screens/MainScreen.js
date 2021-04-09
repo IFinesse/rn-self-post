@@ -14,6 +14,7 @@ import { DATA } from "../data";
 import { Ionicons } from "@expo/vector-icons";
 import { THEME } from "../theme";
 import { PostList } from "../components/PostList";
+import { MenuIcon } from "../components/MenuIcon";
 
 export const MainScreen = ({ navigation }) => {
   const onOpenHandler = (post) => {
@@ -46,15 +47,16 @@ MainScreen.navigationOptions = ( {navigation} ) => ({
   },
   headerLeft: () => {
     return (
-      <View style={styles.menuIconContainer}>
-        <Ionicons
-          color={Platform.OS === "android" ? "#fff" : THEME.MAIN_COLOR}
-          name="ios-menu"
-          size={24}
-          onPress={() => navigation.toggleDrawer()}
-          >
-        </Ionicons>
-      </View>
+      // <View style={styles.menuIconContainer}>
+      //   <Ionicons
+      //     color={Platform.OS === "android" ? "#fff" : THEME.MAIN_COLOR}
+      //     name="ios-menu"
+      //     size={24}
+      //     onPress={() => navigation.toggleDrawer()}
+      //     >
+      //   </Ionicons>
+      // </View>
+      <MenuIcon onPressHandler={navigation.toggleDrawer}/>
     );
   },
 });

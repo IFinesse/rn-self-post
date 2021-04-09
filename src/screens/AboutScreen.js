@@ -2,6 +2,7 @@ import React from "react";
 import { StyleSheet, View, Text, Platform } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import {THEME} from '../theme'
+import { MenuIcon } from "../components/MenuIcon"
 
 export const AboutScreen = ({}) => {
   return (
@@ -15,15 +16,7 @@ AboutScreen.navigationOptions = ( {navigation} ) => ({
   headerTitle: "About us",
   headerLeft: () => {
     return (
-      <View style={styles.menuIconContainer}>
-        <Ionicons
-          color={Platform.OS === "android" ? "#fff" : THEME.MAIN_COLOR}
-          name="ios-menu"
-          size={24}
-          onPress={() => navigation.toggleDrawer()}
-          >
-        </Ionicons>
-      </View>
+      <MenuIcon onPressHandler={navigation.toggleDrawer}/>
     );
   },
 });

@@ -14,6 +14,7 @@ import { DATA } from "../data";
 import { Ionicons } from "@expo/vector-icons";
 import { THEME } from "../theme";
 import {PostList} from '../components/PostList'
+import { MenuIcon } from "../components/MenuIcon"
 
 export const FavouritesScreen = ({ navigation }) => {
   const onOpenHandler = (post) => {
@@ -24,33 +25,19 @@ export const FavouritesScreen = ({ navigation }) => {
   );
 };
 
-FavouritesScreen.navigationOptions = {
+FavouritesScreen.navigationOptions = ( {navigation} ) => ({
   headerTitle: "Favourites",
-  // headerRight: () => {
-  //   return (
-  //     <View style={styles.cameraIconContainer}>
-  //       <Ionicons
-  //         color={Platform.OS === "android" ? "#fff" : THEME.MAIN_COLOR}
-  //         name="camera"
-  //         size={24}>
-  //       </Ionicons>
-  //     </View>
-  //   );
-  // },
   headerLeft: () => {
     return (
-      <View style={styles.menuIconContainer}>
-        <Ionicons
-          color={Platform.OS === "android" ? "#fff" : THEME.MAIN_COLOR}
-          name="ios-menu"
-          size={24}>
-        </Ionicons>
-      </View>
+      <MenuIcon onPressHandler={navigation.toggleDrawer}/>
     );
   },
-};
+});
 
 const styles = StyleSheet.create({
+  menuIconContainer: {
+    paddingLeft: 20
+  },
   cameraIconContainer: {
       width: 90,
       height: 90,
