@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useCallback } from "react";
 import {
   StyleSheet,
   View,
@@ -9,13 +9,35 @@ import {
   Button,
   Alert,
 } from "react-native";
+import {useDispatch,useSelector} from 'react-redux'
 import {createBottomTabNavigator} from 'react-navigation-tabs'
 import { Ionicons } from "@expo/vector-icons";
 import { DATA } from "../data";
 import { THEME } from "../theme";
+import { toggleBooked } from "../store/actions/post";
 
 export const PostScreen = ({ navigation }) => {
+
+  const dispatch = useDispatch()
+
   const postId = navigation.getParam("postId");
+
+  const booked = useSelector(state => state.post.bookedPosts.some(post => post.id === postId))
+
+  useEffect(()=> {
+    navigation.setParams({booked})
+  }, [booked])
+
+  const toggleHandler = useCallback(() => {
+    console.log(postId);
+    dispatch(toggleBooked(postId))
+  }, [dispatch, postId])
+
+  useEffect( ()=> {
+    navigation.setParams( {
+      toggleHandler
+    })
+  }, [toggleHandler])
 
   const post = DATA.find((p) => p.id === postId);
 
@@ -47,6 +69,7 @@ export const PostScreen = ({ navigation }) => {
 PostScreen.navigationOptions = ({ navigation }) => {
   const date = navigation.getParam("date");
   const booked = navigation.getParam('booked');
+  const toggleHandler = navigation.getParam('toggleHandler')
   const iconName = booked ? 'ios-star' : 'ios-star-outline'
   return {
     headerTitle: `post from ${new Date(date).toLocaleDateString()}`,
@@ -56,7 +79,9 @@ PostScreen.navigationOptions = ({ navigation }) => {
             <Ionicons
               color={Platform.OS === "android" ? "#fff" : THEME.MAIN_COLOR}
               name={iconName}
-              size={24}>
+              size={24}
+              onPress = {toggleHandler}
+              >
             </Ionicons>
           </View>
         );
