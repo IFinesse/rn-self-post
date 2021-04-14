@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import {
   StyleSheet,
   View,
@@ -13,6 +13,7 @@ import {
 } from "react-native";
 import {useDispatch} from 'react-redux'
 import { MenuIcon } from "../components/MenuIcon";
+import { PhotoPicker } from "../components/PhotoPicker";
 import { addPost } from "../store/actions/post";
 import { ADD_POST } from "../store/types";
 import { THEME } from "../theme";
@@ -21,19 +22,23 @@ export const CreateScreen = ({navigation}) => {
   const [text, setText] = useState("");
 
   const dispatch = useDispatch();
-
-  const img = 'https://static.coindesk.com/wp-content/uploads/2019/01/shutterstock_1012724596-860x430.jpg'
+  
+  const imgRef = useRef()
 
   const saveHandler = () => {
 
     const post = {
       date: new Date().toJSON(),
       text,
-      img,
+      img: imgRef.current,
       booked: false
     }
     dispatch(addPost(post))
     navigation.navigate('Main');
+  }
+
+  const photoPickHandler = uri => {
+    imgRef.current = uri
   }
 
   return (
@@ -47,17 +52,19 @@ export const CreateScreen = ({navigation}) => {
             onChangeText={setText}
             multiline
           />
-          <Image
+          {/* <Image
             source={{
               uri:
                 "https://static.coindesk.com/wp-content/uploads/2019/01/shutterstock_1012724596-860x430.jpg",
             }}
             style={{ width: "100%", height: 200, marginBottom: 20 }}
-          />
+          /> */}
+          <PhotoPicker onPick={photoPickHandler}/>
           <Button
             title="Save"
             color={THEME.MAIN_COLOR}
             onPress={() => saveHandler()}
+            disabled={!text && !imgRef.current}
           />
         </View>
       </TouchableWithoutFeedback>
