@@ -64,7 +64,7 @@ export const CreateScreen = ({navigation}) => {
             title="Save"
             color={THEME.MAIN_COLOR}
             onPress={() => saveHandler()}
-            disabled={!text && !imgRef.current}
+            disabled={!text || !imgRef.current}
           />
         </View>
       </TouchableWithoutFeedback>
