@@ -3,6 +3,7 @@ import {
   StyleSheet,
   View,
   Platform,
+  ActivityIndicator
 } from "react-native";
 import {useDispatch, useSelector} from 'react-redux'
 // import { DATA } from "../data";
@@ -23,7 +24,12 @@ export const MainScreen = ({ navigation }) => {
   }, [dispatch])
 
   const allPosts = useSelector(state => state.post.allPosts)
-  console.log(allPosts);
+  const loading = useSelector(state=> state.post.loading);
+  // console.log(allPosts);
+
+  if (loading) return <View style={styles.loading}>
+    <ActivityIndicator color={THEME.MAIN_COLOR}/>
+  </View>
 
   return (
     <PostList data={allPosts} onOpen={onOpenHandler}/>
@@ -61,5 +67,10 @@ const styles = StyleSheet.create({
       width: 90,
       height: 90,
       padding: 30,
+  },
+  loading: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
   }
 });
