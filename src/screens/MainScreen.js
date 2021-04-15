@@ -38,7 +38,10 @@ MainScreen.navigationOptions = ( {navigation} ) => ({
         <Ionicons
           color={Platform.OS === "android" ? "#fff" : THEME.MAIN_COLOR}
           name="camera"
-          size={24}>
+          size={24}
+          onPress={()=> navigation.push('Create')}
+          >
+          
         </Ionicons>
       </View>
     );

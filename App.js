@@ -6,6 +6,7 @@ import AppLoading from 'expo-app-loading'
 // import {bootstrap} from './src/bootstrap'
 import { AppNavigation } from './src/navigation/AppNavigation';
 import store from './src/store'
+import {DB} from './src/db'
 
 import { 
   useFonts,
@@ -22,11 +23,15 @@ export default function App() {
 
   const [isReady, setIsReady] = useState(false)
 
+  
+
+  DB.init()
+
   if (!fontsLoaded) return (
     <AppLoading 
       // startAsync = {bootstrap}
-      onFinish= {()=> setIsReady(true)}
-      onError={(error)=> console.log(error)}
+      // onFinish= {()=> setIsReady(true)}
+      // onError={(error)=> console.log(error)}
     />
   )
   return (
